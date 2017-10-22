@@ -9,7 +9,7 @@ export interpolate
 """
     ω_cof(x::Array{Real}, y, d)
 """
-function ω_cof(x::Array{Real}, y, d)
+function ω_cof(x, y, d)
     N = length(x)
     h = x[N] - x[1]
     a = zeros(N - 1)
@@ -24,6 +24,12 @@ function ω_cof(x::Array{Real}, y, d)
     end
     return (a, c, e, ff)
 end  # w_cof
+
+function interpolate(x, y, d, epsilon=1e-6)
+    N = length(x)
+    f0 = t -> (y[N] - y[1]) / (x[N] - x[1]) * (t - x[N]) + y[N]
+    return interpolate(f0, x, y, d, epsilon)
+end # interpolate without f0
 
 function interpolate(f0, x, y, d, epsilon)
     function template(f)
