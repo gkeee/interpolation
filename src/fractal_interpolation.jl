@@ -63,5 +63,5 @@ function interpolate(f0, x, y, d, epsilon)
     return f
 
 end  # interpolation
-
+# 
 end  # module FractalInterpolation
