@@ -4,7 +4,13 @@ include("./utilities.jl")
 
 export ω_cof, hidden_interpolate
 
-function ω_cof(x, y, H, d, h, l, m)
+function ω_cof(x::Vector{<:Real},
+               y::Vector{<:Real},
+               H::Vector{<:Real},
+               d::Vector{<:Real},
+               h::Vector{<:Real},
+               l::Vector{<:Real},
+               m::Vector{<:Real})
     p = y[1 : end - 1] - d * y[1] - h * H[1]
     q = H[1 : end - 1] - l * y[1] - m * H[1]
     r = y[2 : end] - d * y[end] - h * H[end]
