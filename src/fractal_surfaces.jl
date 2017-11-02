@@ -24,7 +24,7 @@ function ω_cof(x,
              - s[2:end, 2:end]
              * (z[end,end] + z[1,1] - z[1,end] - z[end,1])) /
              ((y[end] -y[1]) * (x[end] - x[1]))
-
+        # g = zeros(length(y) - 1, length(x) - 1)
         e = (z[1:end-1, 1:end-1] - z[2:end, 1:end-1]
              - s[2:end, 2:end] * (z[1,1] - z[end,1])
              - g[1:end, 1:end] * y[1] * (x[1] - x[end])) /
