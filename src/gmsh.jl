@@ -80,7 +80,7 @@ function read(file_name::String)
 
     # Get the number of nodes
     idx += 1
-    n_nodes::Int64 = Int(file_lines[idx])
+    n_nodes::Int64 = parse(Int, (file_lines[idx]))
 
     # Read in the node data
     nodes = Array(Float64, n_nodes, 3)
@@ -103,7 +103,7 @@ function read(file_name::String)
 
     # Get the number of elements
     idx += 1
-    n_elem_entries::Int64 = Int(file_lines[idx])
+    n_elem_entries::Int64 = parse(Int, (file_lines[idx]))
 
     # Determine how many columns of space needed to store element data
     # and the number of elements/boundaries on the mesh
@@ -139,15 +139,16 @@ function read(file_name::String)
         if split_line[2] == "1"
             # Edge with boundary condition
             bc_edge_idx += 1
-            boundary_edges[bc_edge_idx] = Int(split_line)[end-1,end]
+            boundary_edges[bc_edge_idx] = parse(Int, (split_line)[end-1,end])
         elseif split_line[2] == "15"
             # Node with boundary condition
             bc_node_idx += 1
-            boundary_nodes[bc_node_idx] = Int(split_line)[end]
+            boundary_nodes[bc_node_idx] = parse(Int, (split_line)[end])
         elseif split_line[2] == "2"
             # Triangular element
             elem_idx += 1
-            elements[elem_idx,:] = Int(split_line)[end-2:end]
+            elements[elem_idx,:] = [parse(Int, i) for i in split_line[end-2:end]]
+            # elements[elem_idx,:] = parse(Int, (split_line)[end-2:end])
         end
     end
 
